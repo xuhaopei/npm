@@ -58,9 +58,10 @@ interface YapiResponseGet {
             [keyName: string]: any,
             title: string, // 接口说明： eg:  动集合列表接口
             path: string, // eg: '/api/v1/activity/number/get_activity_list',
-            req_query: Array<ReqQueryItem>,
+            req_query: Array<ReqQueryItem>, // 请求url上的get内容
             res_body: string, // 响应的body
             method: string, // 接口请求类型： eg: GET
+            req_body_other: string, // post请求的body内容
         },
     }
 }
