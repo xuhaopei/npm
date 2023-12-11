@@ -1,9 +1,9 @@
 {
-  "name": "yapi2ts",
+  "name": "y2ts",
   "version": "1.0.0",
   "main": "index.js",
   "bin": {
-    "yapi2ts": "bin/index.js"
+    "y2ts": "bin/index.js"
   },
   "scripts": {
     "build": "npx webpack"

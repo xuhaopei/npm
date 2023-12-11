@@ -2,9 +2,13 @@ import { writeJSON, readJSON, deleteFileOrDir } from "@/utils/BaseFileHandle";
 const inquirer = require('inquirer')        //弹出交互选项，询问用户要创建的项目需要哪些功能
 const fs = require('fs');
 const path = require('path');
+const os = require('os');
 import log from "@/utils/BaseLog";
 import { interfaceGet } from "@/utils/BaseApiYapi"
 
+const mapType: {[keyName: string]: any} = {
+    'integer': 'number',
+}
 interface Properties {
     [keyName: string]: {
         type: string;
@@ -41,7 +45,7 @@ const renderInterface = (data: Properties) => {
         } else {
             let desc = data[key].description
             currentRenderStr += `
-            ${key} : ${type};  ${desc ? `// ${desc}` : ''}
+            ${key} : ${mapType[type] || type};  ${desc ? `// ${desc}` : ''}
 `
         }
     }
@@ -65,7 +69,7 @@ const capitalizeFirstLetter = (str: string | undefined) => {
     let url = ''
     try {
         // 获取tokenJson
-        let tokenFileUrl = path.join('/', 'yapitoken.txt');
+        let tokenFileUrl = path.join(os.homedir(), 'yapitoken.txt');
         try {
             tokenJson = JSON.parse(await readJSON(tokenFileUrl))
         } catch (error) {

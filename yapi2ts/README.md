@@ -23,4 +23,10 @@ npm link
 // 完成调试
 npm unlink
 ```
+# 发布
+```sh
+npm publish
+```
 
+# 更新：
+1. 2023-12-11 修复文件写入bug，改成写入用户目录。
