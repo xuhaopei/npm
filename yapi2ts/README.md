@@ -2,10 +2,10 @@
 通过传入yapi的url，可以打印出对应的ts接口信息。
 
 # 安装
-npm i yapi2ts -g 
+npm i y2ts -g 
 
 # 使用
-yapi2ts
+y2ts
 
 # 开发人员维护：
 
