@@ -98,6 +98,7 @@ export default async () => {
             token = token.trim()
             tokenJson.token = token
             writeJSON(tokenFileUrl, JSON.stringify(tokenJson))
+            log.success('token保存成功，路径为：' + tokenFileUrl)
         }
 
         // 获取接口url
@@ -140,7 +141,6 @@ export default async () => {
         let body = {
             properties: {}
         }
-        console.log(data)
         try {
             body = JSON.parse(data.res_body)
         } catch (error) {

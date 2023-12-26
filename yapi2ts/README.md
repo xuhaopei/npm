@@ -5,7 +5,9 @@
 npm i y2ts -g 
 
 # 使用
-y2ts
+y2ts render // 渲染api
+
+y2ts del // 删除token文件
 
 # 开发人员维护：
 
@@ -23,10 +25,12 @@ npm link
 // 完成调试
 npm unlink
 ```
-# 发布
+# 发布或更新
 ```sh
-npm publish
+npm who am i  // 查看自己是否在线
+npm publish // 发布， 注意更改版本号
 ```
 
 # 更新：
 1. 2023-12-11 修复文件写入bug，改成写入用户目录。
+2. 2023-12-26 支持删除token文件
