@@ -44,11 +44,11 @@ export default async () => {
                 }
                 return true;
             },
-            default: 0,
+            default: '0',
         },
         {
             type: "input",
-            message: "请填写读取的哪一列为key值，从0开始计算：:",
+            message: "请填写读取的哪一列为key值，从0开始计算:",
             name: "key",
             validate: function (val: string) {
                 if (/\d/g.test(val) === false) {
@@ -57,23 +57,23 @@ export default async () => {
                 }
                 return true;
             },
-            default: 0,
+            default: '0',
         },
         {
             type: "input",
-            message: "请填写读取的哪一列为value值，从0开始计算：:",
-            name: "value",
+            message: "请填写读取的哪一列为value值，从0开始计算,以逗号分隔:",
+            name: "values",
             validate: function (val: string) {
-                if (/\d/g.test(val) === false) {
+                if (/[\d,]/g.test(val) === false) {
                     log.error(`\n请输入数字，当前输入为：${val}`);
                     return false;
                 }
                 return true;
             },
-            default: 0,
+            default: '0',
         },
-    ])) as { url: string, index: number, key: number, value: number, jsonUrl: string };
-    let { url, jsonUrl, index, key, value } = data
+    ])) as { url: string, index: number, key: number, values: string, jsonUrl: string };
+    let { url, jsonUrl, index, key, values } = data
 
     interface WorkSheetsFromFile {
         name: string,
@@ -100,18 +100,21 @@ export default async () => {
     }
 
     let list = workSheetsFromFile[index].data
-
-    log.error(`{`)
-    for (let i = 0; i < list.length; i++) {
-        let keyStr = String(list[i][key]).trim()
-        let valueStr = String(list[i][value]).trim()
-        if (keyStr === 'undefined' || valueStr === 'undefined' || jsonObj[keyStr]) continue
-        if (i % 2 === 0) {
-            log.primary(`"${keyStr}":"${valueStr}",`)
-        } else {
-            log.success(`"${keyStr}":"${valueStr}",`)
+    let valueList = values.split(',')
+    for (let j = 0; j < valueList.length; j++) {
+        log.error(`========values:${valueList[j]}=======`)
+        log.error(`{`)
+        for (let i = 0; i < list.length; i++) {
+            let keyStr = String(list[i][key]).trim()
+            let valueStr = String(list[i][Number(valueList[j])]).trim()
+            if (keyStr === 'undefined' || valueStr === 'undefined' || jsonObj[keyStr]) continue
+            if (i % 2 === 0) {
+                log.primary(`"${keyStr}":"${valueStr}",`)
+            } else {
+                log.success(`"${keyStr}":"${valueStr}",`)
+            }
         }
+        log.error(`}\n\n`)
     }
-    log.error(`}`)
 
 }
