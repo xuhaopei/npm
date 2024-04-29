@@ -105,8 +105,8 @@ export default async () => {
         log.error(`========values:${valueList[j]}=======`)
         log.error(`{`)
         for (let i = 0; i < list.length; i++) {
-            let keyStr = String(list[i][key]).trim()
-            let valueStr = String(list[i][Number(valueList[j])]).trim()
+            let keyStr = String(list[i][key]).trim().replace(/[\n]/g, ',').replace(/["]/g, `'`)
+            let valueStr = String(list[i][Number(valueList[j])]).trim().replace(/[\n]/g, ',').replace(/["]/g, `'`)
             if (keyStr === 'undefined' || valueStr === 'undefined' || jsonObj[keyStr]) continue
             if (i % 2 === 0) {
                 log.primary(`"${keyStr}":"${valueStr}",`)
