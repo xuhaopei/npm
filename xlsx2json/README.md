@@ -2,7 +2,7 @@
 为多语言服务，将xlxs里面的各列之间转成json，方便开发导入多语言文案.
 
 # 安装
-npm i
+npm i op-xlsx2json
 # 使用
 xlsx2json 
 

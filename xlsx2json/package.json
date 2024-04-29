@@ -1,9 +1,9 @@
 {
-  "name": "xlsx2json",
-  "version": "1.0.2",
+  "name": "op-xlsx2json",
+  "version": "1.0.0",
   "main": "index.js",
   "bin": {
-    "xlsx2json": "bin/index.js"
+    "xlsxjson": "bin/index.js"
   },
   "scripts": {
     "build": "npx webpack"
