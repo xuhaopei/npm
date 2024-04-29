@@ -19,12 +19,12 @@ npm run build
 // 调试方法1
 // 本地包链接成全局包
 npm link
-template test(自定义)
+xlsx2json test(自定义)
 npm unlink // 结束调试
 
 // 调试方法2
 cd dist
-node ./dist/index.js test(自定义)
+node ./dist/index.js
 ```
 # 发布或更新
 ```sh
