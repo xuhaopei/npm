@@ -84,14 +84,14 @@ export default async () => {
     let workSheetsFromFile: Array<WorkSheetsFromFile> = []
     let jsonObj: { [keyName: string]: any } = {}
     try {
-        workSheetsFromFile = xlsx.parse(url.replace(/[\"\']/g, ''));
+        workSheetsFromFile = xlsx.parse(url.trim().replace(/[\"\']/g, ''));
     } catch (error) {
         log.error('\n文件读取失败，当前文件路径为：' + url)
         console.log(error)
     }
     try {
         if (jsonUrl !== 'not use') {
-            jsonObj = await readJSON(jsonUrl.replace(/[\"\']/g, ''));
+            jsonObj = await readJSON(jsonUrl.trim().replace(/[\"\']/g, ''));
         }
 
     } catch (error) {
