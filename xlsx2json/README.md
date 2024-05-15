@@ -23,8 +23,8 @@ xlsx2json test(自定义)
 npm unlink // 结束调试
 
 // 调试方法2
-cd dist
-node ./dist/index.js
+npm run build
+node dist/index.js
 ```
 # 发布或更新
 ```sh
@@ -33,3 +33,5 @@ npm publish // 发布， 注意更改版本号
 ```
 
 # 更新：
+## 20240515
+1. 无数据支持生成json文件

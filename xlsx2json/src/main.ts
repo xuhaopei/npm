@@ -1,7 +1,8 @@
 const inquirer = require('inquirer')        //弹出交互选项，询问用户要创建的项目需要哪些功能
+const path = require('path')                //路径处理
 import xlsx from 'node-xlsx';
 import log from "@/utils/BaseLog";
-import { readJSON } from './utils/BaseFileHandle';
+import { readJSON, writeJSON } from './utils/BaseFileHandle';
 
 
 export default async () => {
@@ -22,7 +23,7 @@ export default async () => {
         },
         {
             type: "input",
-            message: "请填写旧json文件绝对路径",
+            message: "请填写旧json文件绝对路径，若取默认值，则生成对应的json文件",
             name: "jsonUrl",
             validate: function (val: string) {
                 if (val.trim().length == 0) {
@@ -101,20 +102,37 @@ export default async () => {
 
     let list = workSheetsFromFile[index].data
     let valueList = values.split(',')
-    for (let j = 0; j < valueList.length; j++) {
-        log.error(`========values:${valueList[j]}=======`)
-        log.error(`{`)
-        for (let i = 0; i < list.length; i++) {
-            let keyStr = String(list[i][key]).trim().replace(/[\n]/g, ',').replace(/["]/g, `'`)
-            let valueStr = String(list[i][Number(valueList[j])]).trim().replace(/[\n]/g, ',').replace(/["]/g, `'`)
-            if (keyStr === 'undefined' || valueStr === 'undefined' || jsonObj[keyStr]) continue
-            if (i % 2 === 0) {
-                log.primary(`"${keyStr}":"${valueStr}",`)
-            } else {
-                log.success(`"${keyStr}":"${valueStr}",`)
+
+    if (jsonUrl === 'not use') {
+        for (let j = 0; j < valueList.length; j++) {
+            let obj:any = {}
+            let url = path.join(__dirname, `./${valueList[j]}.json`)
+            log.error(`url:${url}`)
+            for (let i = 0; i < list.length; i++) {
+                let keyStr = String(list[i][key]).trim().replace(/[\n]/g, ',').replace(/["]/g, `'`)
+                let valueStr = String(list[i][Number(valueList[j])]).trim().replace(/[\n]/g, ',').replace(/["]/g, `'`)
+                if (keyStr === 'undefined' || valueStr === 'undefined' || jsonObj[keyStr]) continue
+                obj[keyStr] = valueStr
             }
+            writeJSON(url, obj)
         }
-        log.error(`}\n\n`)
+    }
+    else {
+        for (let j = 0; j < valueList.length; j++) {
+            log.error(`========values:${valueList[j]}=======`)
+            log.error(`{`)
+            for (let i = 0; i < list.length; i++) {
+                let keyStr = String(list[i][key]).trim().replace(/[\n]/g, ',').replace(/["]/g, `'`)
+                let valueStr = String(list[i][Number(valueList[j])]).trim().replace(/[\n]/g, ',').replace(/["]/g, `'`)
+                if (keyStr === 'undefined' || valueStr === 'undefined' || jsonObj[keyStr]) continue
+                if (i % 2 === 0) {
+                    log.primary(`"${keyStr}":"${valueStr}",`)
+                } else {
+                    log.success(`"${keyStr}":"${valueStr}",`)
+                }
+            }
+            log.error(`}\n\n`)
+        }
     }
 
 }

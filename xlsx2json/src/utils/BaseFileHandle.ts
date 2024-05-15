@@ -10,9 +10,9 @@ export async function  readJSON (path:string) {
   }
 }
 
-export async function writeJSON (path:string, content:string) {
+export async function writeJSON (path:string, obj:Object) {
   try {
-    await fs.outputFile(path, JSON.stringify(content, null, "\t"))
+    await fs.outputFile(path, JSON.stringify(obj, null, "\t"))
   } catch (err) {
     console.error(err)
   }
