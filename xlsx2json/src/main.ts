@@ -106,8 +106,7 @@ export default async () => {
     if (jsonUrl === 'not use') {
         for (let j = 0; j < valueList.length; j++) {
             let obj:any = {}
-            let url = path.join(__dirname, `./${valueList[j]}.json`)
-            log.error(`url:${url}`)
+            let url = `./${valueList[j]}.json`
             for (let i = 0; i < list.length; i++) {
                 let keyStr = String(list[i][key]).trim().replace(/[\n]/g, ',').replace(/["]/g, `'`)
                 let valueStr = String(list[i][Number(valueList[j])]).trim().replace(/[\n]/g, ',').replace(/["]/g, `'`)

@@ -2,7 +2,7 @@
 为多语言服务，将xlxs里面的各列之间转成json，方便开发导入多语言文案.
 
 # 安装
-npm i op-xlsx2json
+npm i op-xlsx2json -g
 # 使用
 xlsx2json 
 
@@ -19,7 +19,7 @@ npm run build
 // 调试方法1
 // 本地包链接成全局包
 npm link
-xlsx2json test(自定义)
+xlsx2json
 npm unlink // 结束调试
 
 // 调试方法2
